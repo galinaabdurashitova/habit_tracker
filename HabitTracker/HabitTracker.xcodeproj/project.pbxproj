@@ -14,7 +14,7 @@
 		2A21C5EE2DF8CF5E002A1B19 /* Exceptions for "HabitTracker" folder in "HabitTracker" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				SupportingFiles/Info.plist,
 			);
 			target = 2A21C5DB2DF8CF5C002A1B19 /* HabitTracker */;
 		};
@@ -147,7 +147,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 77G893PS3R;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HabitTracker/Info.plist;
+				INFOPLIST_FILE = HabitTracker/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -175,7 +175,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 77G893PS3R;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HabitTracker/Info.plist;
+				INFOPLIST_FILE = HabitTracker/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
