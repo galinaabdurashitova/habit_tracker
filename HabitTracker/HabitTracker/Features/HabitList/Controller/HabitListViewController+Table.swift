@@ -25,8 +25,7 @@ extension HabitListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let today = Date()
-        habits[indexPath.row].toggle(for: today)
+        habits[indexPath.row].toggle(for: Date())
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
