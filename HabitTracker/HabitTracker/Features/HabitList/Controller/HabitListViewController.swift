@@ -9,11 +9,7 @@ import Foundation
 import UIKit
 
 class HabitListViewController: UIViewController {
-    internal var habits: [Habit] = [
-        Habit(id: UUID(), title: "Drink water"),
-        Habit(id: UUID(), title: "Walk 30 minutes"),
-        Habit(id: UUID(), title: "Read 10 pages")
-    ]
+    internal var habits: [Habit] = []
     
     internal let tableView: UITableView = {
         let tableView = UITableView()
@@ -38,16 +34,38 @@ class HabitListViewController: UIViewController {
         return label
     }()
     
+    private let inputViewContainer = TextFieldView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        inputViewContainer.addButton.addTarget(
+            self,
+            action: #selector(addHabit),
+            for: .touchUpInside
+        )
         setupUI()
+    }
+    
+    @objc private func addHabit() {
+        guard let title = inputViewContainer
+            .habitTextField
+            .text?
+            .trimmingCharacters(in: .whitespacesAndNewlines),
+                !title.isEmpty else {
+            return
+        }
+
+        let newHabit = Habit(id: UUID(), title: title)
+        habits.append(newHabit)
+        tableView.reloadData()
+        inputViewContainer.habitTextField.text = ""
     }
     
     private func setupUI() {
         view.backgroundColor = .systemBackground
-        view.addSubviews(titleLabel, dateLabel, tableView)
+        view.addSubviews(titleLabel, dateLabel, tableView, inputViewContainer)
         setupConstraints()
     }
     
@@ -69,6 +87,12 @@ class HabitListViewController: UIViewController {
             bottom: view.bottomAnchor,
             leading: view.leadingAnchor,
             trailing: view.trailingAnchor
+        )
+        
+        inputViewContainer.anchor(
+            bottom: view.bottomAnchor, bottomConstant: 0,
+            leading: view.leadingAnchor, leadingConstant: 0,
+            trailing: view.trailingAnchor, trailingConstant: 0
         )
     }
 }
