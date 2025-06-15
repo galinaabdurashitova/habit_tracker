@@ -25,15 +25,13 @@ extension HabitListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        habits[indexPath.row].toggle(for: Date())
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+        viewModel.toggleHabitCompletion(at: indexPath.row, for: Date())
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            habits.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            viewModel.deleteHabit(at: indexPath.row)
         }
     }
 }

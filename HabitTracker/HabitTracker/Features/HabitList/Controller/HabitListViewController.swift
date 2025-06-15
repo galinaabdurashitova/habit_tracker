@@ -8,7 +8,39 @@
 import Foundation
 import UIKit
 
+extension HabitListViewController: HabitListViewModelDelegate {
+    func didUpdateHabits(_ habits: [Habit]) {
+        self.habits = habits
+        tableView.reloadData()
+    }
+}
+
 class HabitListViewController: UIViewController {
+    internal let viewModel: HabitListViewModel
+
+    init(viewModel: HabitListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel.delegate = self
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
+        inputViewContainer.addButton.addTarget(
+            self,
+            action: #selector(addHabit),
+            for: .touchUpInside
+        )
+        setupUI()
+        viewModel.loadHabits()
+    }
+    
     internal var habits: [Habit] = []
     
     internal let tableView: UITableView = {
@@ -36,18 +68,6 @@ class HabitListViewController: UIViewController {
     
     private let inputViewContainer = TextFieldView()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
-        inputViewContainer.addButton.addTarget(
-            self,
-            action: #selector(addHabit),
-            for: .touchUpInside
-        )
-        setupUI()
-    }
-    
     @objc private func addHabit() {
         guard let title = inputViewContainer
             .habitTextField
@@ -57,9 +77,7 @@ class HabitListViewController: UIViewController {
             return
         }
 
-        let newHabit = Habit(id: UUID(), title: title)
-        habits.append(newHabit)
-        tableView.reloadData()
+        viewModel.addHabit(title: title)
         inputViewContainer.habitTextField.text = ""
     }
     

@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2AD05DC02DFF23E4009A93A3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD05DBF2DFF23E4009A93A3 /* CoreData.framework */; };
+		2AD05DF02DFF266E009A93A3 /* Habit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2AD05DEE2DFF266E009A93A3 /* Habit.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		2A21C5DC2DF8CF5C002A1B19 /* HabitTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AD05DBF2DFF23E4009A93A3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2AD05DEF2DFF266E009A93A3 /* Habit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Habit.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AD05DC02DFF23E4009A93A3 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,7 +53,9 @@
 		2A21C5D32DF8CF5C002A1B19 = {
 			isa = PBXGroup;
 			children = (
+				2AD05DEE2DFF266E009A93A3 /* Habit.xcdatamodeld */,
 				2A21C5DE2DF8CF5C002A1B19 /* HabitTracker */,
+				2AD05DBE2DFF23E4009A93A3 /* Frameworks */,
 				2A21C5DD2DF8CF5C002A1B19 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +66,14 @@
 				2A21C5DC2DF8CF5C002A1B19 /* HabitTracker.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2AD05DBE2DFF23E4009A93A3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2AD05DBF2DFF23E4009A93A3 /* CoreData.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AD05DF02DFF266E009A93A3 /* Habit.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +356,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2AD05DEE2DFF266E009A93A3 /* Habit.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2AD05DEF2DFF266E009A93A3 /* Habit.xcdatamodel */,
+			);
+			currentVersion = 2AD05DEF2DFF266E009A93A3 /* Habit.xcdatamodel */;
+			path = Habit.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2A21C5D42DF8CF5C002A1B19 /* Project object */;
 }
