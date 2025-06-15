@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol HabitListViewModelDelegate: AnyObject {
-    func didUpdateHabits(_ habits: [Habit])
-}
-
 final class HabitListViewModel {
     private let storage: HabitStorageProtocol
     private(set) var habits: [Habit] = []
