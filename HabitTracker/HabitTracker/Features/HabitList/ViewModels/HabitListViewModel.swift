@@ -10,6 +10,7 @@ import Foundation
 final class HabitListViewModel {
     private let storage: HabitStorageProtocol
     private(set) var habits: [Habit] = []
+    private var selectedDate: Date = Date()
 
     weak var delegate: HabitListViewModelDelegate?
 
@@ -37,6 +38,20 @@ final class HabitListViewModel {
     func toggleHabitCompletion(at index: Int, for date: Date) {
         let habit = habits[index]
         storage.markHabit(habit, doneAt: date)
+        loadHabits()
+    }
+    
+    func updateDate(to date: Date) {
+        selectedDate = date
+        delegate?.didUpdateHabits(habits) 
+    }
+
+    func toggleHabitCompletion(at index: Int, for date: Date? = nil) {
+        let habit = habits[index]
+        let dateToUse = date ?? selectedDate
+        var updatedHabit = habit
+        updatedHabit.toggle(for: dateToUse)
+        storage.markHabit(habit, doneAt: dateToUse)
         loadHabits()
     }
 }

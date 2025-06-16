@@ -18,4 +18,10 @@ extension Date {
         formatter.timeZone = .current
         return formatter.string(from: self)
     }
+    
+    var startOfWeek: Date {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+        return calendar.date(from: components)!
+    }
 }

@@ -40,6 +40,7 @@ class HabitListView: UIView {
         return stack
     }()
     
+    internal let weekSelectorView = WeekSelectorView()
     internal let inputViewContainer = TextFieldView()
     
     override init(frame: CGRect) {
@@ -56,7 +57,7 @@ class HabitListView: UIView {
         backgroundColor = .systemBackground
         headerStack.addArrangedSubview(titleLabel)
         headerStack.addArrangedSubview(dateLabel)
-        addSubviews(headerStack, tableView, inputViewContainer)
+        addSubviews(headerStack, weekSelectorView, tableView, inputViewContainer)
         setupConstraints()
     }
     
@@ -66,9 +67,17 @@ class HabitListView: UIView {
             leading: leadingAnchor, leadingConstant: 16,
             trailing: trailingAnchor, trailingConstant: 16
         )
+        
+        weekSelectorView.anchor(
+            top: dateLabel.bottomAnchor, topConstant: 12,
+            leading: leadingAnchor, leadingConstant: 16,
+            trailing: trailingAnchor, trailingConstant: 16
+        )
+        
+        weekSelectorView.setSize(height: 44)
 
         tableView.anchor(
-            top: headerStack.bottomAnchor, topConstant: 16,
+            top: weekSelectorView.bottomAnchor, topConstant: 12,
             bottom: bottomAnchor,
             leading: leadingAnchor,
             trailing: trailingAnchor

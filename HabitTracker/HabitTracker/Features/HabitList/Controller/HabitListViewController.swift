@@ -33,6 +33,10 @@ class HabitListViewController: UIViewController {
             for: .touchUpInside
         )
         viewModel.loadHabits()
+        
+        rootView.weekSelectorView.onDateSelected = { [weak self] date in
+            self?.viewModel.updateDate(to: date)
+        }
     }
     
     override func loadView() {
