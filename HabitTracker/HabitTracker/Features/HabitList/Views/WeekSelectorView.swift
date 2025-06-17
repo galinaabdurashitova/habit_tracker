@@ -111,25 +111,20 @@ class WeekSelectorView: UIView {
         }
     }
     
-    private func makeDateButton(for date: Date) -> UIButton {
-        let button = UIButton(type: .system)
-        button.titleLabel?.numberOfLines = 3
-        button.titleLabel?.textAlignment = .center
-        button.setTitle(dateFormatter.string(from: date), for: .normal)
-//        button.tag = i
-
-        button.addAction(UIAction { [weak self] _ in
-            guard let self else { return }
-            self.selectedDate = date
-            self.onDateSelected?(date)
-        }, for: .touchUpInside)
-
-        button.setTitleColor(
-               calendar.isDate(date, inSameDayAs: selectedDate) ? .systemBlue : .label,
-               for: .normal
-           )
-        
+    private func makeDateButton(for date: Date) -> DayButtonView {
+        let button = DayButtonView()
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        button.configure(for: date, selected: calendar.isDate(date, inSameDayAs: selectedDate))
+        button.addTarget(self, action: #selector(dayTapped(_:)), for: .touchUpInside)
         return button
+    }
+
+    @objc private func dayTapped(_ sender: DayButtonView) {
+        print("Tapped on: \(sender.representedDate?.description ?? "nil")")
+        guard let date = sender.representedDate else { return }
+        self.selectedDate = date
+        self.onDateSelected?(date)
     }
 
     @objc private func goToPreviousWeek() {

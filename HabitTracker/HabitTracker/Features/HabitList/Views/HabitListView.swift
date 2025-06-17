@@ -74,7 +74,7 @@ class HabitListView: UIView {
             trailing: trailingAnchor, trailingConstant: 16
         )
         
-        weekSelectorView.setSize(height: 44)
+        weekSelectorView.setSize(height: 56)
 
         tableView.anchor(
             top: weekSelectorView.bottomAnchor, topConstant: 12,
