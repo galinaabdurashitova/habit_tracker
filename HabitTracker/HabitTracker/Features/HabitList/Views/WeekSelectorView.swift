@@ -45,20 +45,42 @@ class WeekSelectorView: UIView {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 4
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        stackView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
-        let navStack = UIStackView(arrangedSubviews: [previousButton, stackView, nextButton])
-        navStack.axis = .horizontal
-        navStack.spacing = 8
-        navStack.alignment = .center
-
-        addSubview(navStack)
-        navStack.translatesAutoresizingMaskIntoConstraints = false
+        let container = UIView()
+        addSubview(container)
+        container.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            navStack.topAnchor.constraint(equalTo: topAnchor),
-            navStack.bottomAnchor.constraint(equalTo: bottomAnchor),
-            navStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            navStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            container.topAnchor.constraint(equalTo: topAnchor),
+            container.bottomAnchor.constraint(equalTo: bottomAnchor),
+            container.leadingAnchor.constraint(equalTo: leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
+
+        container.addSubview(previousButton)
+        container.addSubview(stackView)
+        container.addSubview(nextButton)
+
+        previousButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            previousButton.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            previousButton.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+            previousButton.widthAnchor.constraint(equalToConstant: 30),
+
+            nextButton.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+            nextButton.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+            nextButton.widthAnchor.constraint(equalToConstant: 30),
+
+            stackView.leadingAnchor.constraint(equalTo: previousButton.trailingAnchor, constant: 8),
+            stackView.trailingAnchor.constraint(equalTo: nextButton.leadingAnchor, constant: -8),
+            stackView.topAnchor.constraint(equalTo: container.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: container.bottomAnchor)
+        ])
+
     }
 
     private func updateDays() {
@@ -70,8 +92,8 @@ class WeekSelectorView: UIView {
 
             let button = UIButton(type: .system)
             let formatter = DateFormatter()
-            formatter.dateFormat = "E\nd"
-            button.titleLabel?.numberOfLines = 2
+            formatter.dateFormat = "MMM\nE\nd"
+            button.titleLabel?.numberOfLines = 3
             button.titleLabel?.textAlignment = .center
             button.setTitle(formatter.string(from: date), for: .normal)
             button.tag = i

@@ -10,7 +10,7 @@ import Foundation
 final class HabitListViewModel {
     private let storage: HabitStorageProtocol
     private(set) var habits: [Habit] = []
-    private var selectedDate: Date = Date()
+    internal var selectedDate: Date = Date()
 
     weak var delegate: HabitListViewModelDelegate?
 

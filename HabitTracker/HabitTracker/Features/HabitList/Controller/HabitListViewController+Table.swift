@@ -20,12 +20,12 @@ extension HabitListViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell(style: .default, reuseIdentifier: "HabitCell")
         }
 
-        cell.configure(with: habit, for: Date())
+        cell.configure(with: habit, for: viewModel.selectedDate)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.toggleHabitCompletion(at: indexPath.row, for: Date())
+        viewModel.toggleHabitCompletion(at: indexPath.row, for: viewModel.selectedDate)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,

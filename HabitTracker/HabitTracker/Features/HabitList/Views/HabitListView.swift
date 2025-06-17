@@ -69,7 +69,7 @@ class HabitListView: UIView {
         )
         
         weekSelectorView.anchor(
-            top: dateLabel.bottomAnchor, topConstant: 12,
+            top: headerStack.bottomAnchor, topConstant: 12,
             leading: leadingAnchor, leadingConstant: 16,
             trailing: trailingAnchor, trailingConstant: 16
         )
