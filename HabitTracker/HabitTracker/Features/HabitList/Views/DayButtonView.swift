@@ -19,7 +19,7 @@ class DayButtonView: UIControl {
     
     private let dotView: UIView = {
         let dot = UIView()
-        dot.backgroundColor = .systemBlue
+        dot.backgroundColor = .white
         dot.layer.cornerRadius = 3
         dot.isHidden = true
         return dot
@@ -35,6 +35,7 @@ class DayButtonView: UIControl {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .center
+        stack.distribution = .equalSpacing
         stack.spacing = 4
         return stack
     }()
@@ -53,6 +54,10 @@ class DayButtonView: UIControl {
     }
     
     private func setupUI() {
+        backgroundColor = .systemBlue
+        layer.cornerRadius = 8
+        clipsToBounds = true
+        
         addSubview(stack)
         stack.addSubviews(titleLabel, dotView)
 //        stack.addArrangedSubview(titleLabel)
@@ -64,18 +69,18 @@ class DayButtonView: UIControl {
         stack.anchor(
             top: topAnchor,
             bottom: bottomAnchor,
-            leading: leadingAnchor,
-            trailing: trailingAnchor
+            centerX: centerXAnchor
         )
         
         titleLabel.anchor(
-            top: stack.topAnchor
+            top: stack.topAnchor, //topConstant: 4,
+            centerX: stack.centerXAnchor
         )
         
         dotView.anchor(
             top: titleLabel.bottomAnchor, topConstant: 4,
-            bottom: stack.bottomAnchor,
-            centerX: titleLabel.centerXAnchor
+            bottom: stack.bottomAnchor, bottomConstant: 4,
+            centerX: stack.centerXAnchor
         )
         
         dotView.setSize(width: 6, height: 6)
@@ -89,7 +94,9 @@ class DayButtonView: UIControl {
     }
     
     private func updateStyle() {
-        titleLabel.textColor = isSelected ? .systemBlue : .label
+        titleLabel.textColor = isSelected ? .white : .label
+        backgroundColor =  isSelected ? .systemBlue : .clear
+        dotView.backgroundColor = isSelected ? .white : .systemBlue
         dotView.isHidden = !calendar.isDateInToday(representedDate ?? Date())
     }
     
