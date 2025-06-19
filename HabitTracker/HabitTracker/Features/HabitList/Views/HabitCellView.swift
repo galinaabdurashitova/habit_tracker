@@ -12,7 +12,7 @@ class HabitCellView: UITableViewCell {
 
     private let container: UIView = {
         let container = UIView()
-        container.backgroundColor = UIColor.label.withAlphaComponent(0.1)
+        container.backgroundColor = UIColor.systemGray6
         container.layer.cornerRadius = 12
         return container
     }()
@@ -47,8 +47,8 @@ class HabitCellView: UITableViewCell {
     
     private func setupConstraints() {
         container.anchor(
-            top: contentView.topAnchor, topConstant: 4,
-            bottom: contentView.bottomAnchor, bottomConstant: 4,
+            top: contentView.topAnchor, topConstant: 2,
+            bottom: contentView.bottomAnchor, bottomConstant: 2,
             leading: contentView.leadingAnchor, leadingConstant: 16,
             trailing: contentView.trailingAnchor, trailingConstant: 16
         )
@@ -64,13 +64,13 @@ class HabitCellView: UITableViewCell {
             trailing: container.trailingAnchor, trailingConstant: 12,
             centerY: container.centerYAnchor
         )
-        checkmarkImageView.setSize(width: 24, height: 24)
+        checkmarkImageView.setSize(width: 30, height: 30)
     }
 
     func configure(with habit: Habit, for date: Date) {
         titleLabel.text = habit.title
         let isDone = habit.isCompleted(for: date)
-        checkmarkImageView.image = UIImage(systemName: isDone ? "checkmark.circle.fill" : "circle")
-        checkmarkImageView.tintColor = isDone ? .systemGreen : .systemGray
+        checkmarkImageView.image = UIImage(systemName: isDone ? "checkmark.circle.fill" : "circle.fill")
+        checkmarkImageView.tintColor = isDone ? .systemGreen : .systemGray4
     }
 }

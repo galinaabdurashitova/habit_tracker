@@ -21,12 +21,26 @@ class WeekSelectorView: UIView {
     private let previousButton: UIButton = {
         let previousButton = UIButton(type: .system)
         previousButton.setTitle("<", for: .normal)
+        previousButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .black)
+        previousButton.backgroundColor = .systemBackground
+        previousButton.layer.cornerRadius = 15
+        previousButton.layer.shadowColor = UIColor.systemGray.cgColor
+        previousButton.layer.shadowOpacity = 1
+        previousButton.layer.shadowOffset = .init(width: 2, height: 2)
+        previousButton.layer.shadowRadius = 0
         return previousButton
     }()
     
     private let nextButton: UIButton = {
         let nextButton = UIButton(type: .system)
         nextButton.setTitle(">", for: .normal)
+        nextButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .heavy)
+        nextButton.backgroundColor = .systemBackground
+        nextButton.layer.cornerRadius = 15
+        nextButton.layer.shadowColor = UIColor.systemGray.cgColor
+        nextButton.layer.shadowOpacity = 1
+        nextButton.layer.shadowOffset = .init(width: 2, height: 2)
+        nextButton.layer.shadowRadius = 0
         return nextButton
     }()
     
@@ -43,6 +57,12 @@ class WeekSelectorView: UIView {
         stackView.spacing = 4
         stackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         stackView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        stackView.backgroundColor = .systemBackground
+        stackView.layer.cornerRadius = 8
+        stackView.layer.shadowColor = UIColor.systemGray.cgColor
+        stackView.layer.shadowOpacity = 1
+        stackView.layer.shadowOffset = .init(width: 2, height: 2)
+        stackView.layer.shadowRadius = 0
         return stackView
     }()
     
@@ -93,7 +113,7 @@ class WeekSelectorView: UIView {
         nextButton.setSize(width: 30)
         
         stackView.anchor(
-            top: container.topAnchor,
+            top: container.topAnchor, 
             bottom: container.bottomAnchor,
             leading: previousButton.trailingAnchor, leadingConstant: 8,
             trailing: nextButton.leadingAnchor, trailingConstant: 8

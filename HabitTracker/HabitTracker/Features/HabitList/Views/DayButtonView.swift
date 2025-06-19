@@ -11,9 +11,17 @@ import UIKit
 class DayButtonView: UIControl {
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 3
+        label.numberOfLines = 2
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 10)
+        return label
+    }()
+    
+    private let dateLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         return label
     }()
     
@@ -21,13 +29,19 @@ class DayButtonView: UIControl {
         let dot = UIView()
         dot.backgroundColor = .white
         dot.layer.cornerRadius = 3
-        dot.isHidden = true
+        dot.layer.opacity = 0
         return dot
     }()
     
-    private let dateFormatter: DateFormatter = {
+    private let monthAndWeekDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM\nE\nd"
+        formatter.dateFormat = "MMM\nE"
+        return formatter
+    }()
+    
+    private let dayDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
         return formatter
     }()
     
@@ -36,7 +50,7 @@ class DayButtonView: UIControl {
         stack.axis = .vertical
         stack.alignment = .center
         stack.distribution = .equalSpacing
-        stack.spacing = 4
+        stack.spacing = 0
         return stack
     }()
     
@@ -59,28 +73,20 @@ class DayButtonView: UIControl {
         clipsToBounds = true
         
         addSubview(stack)
-        stack.addSubviews(titleLabel, dotView)
-//        stack.addArrangedSubview(titleLabel)
-//        stack.addArrangedSubview(dotView)
+//        stack.addSubviews(titleLabel, dateLabel, dotView)
+        stack.addArrangedSubview(titleLabel)
+        stack.addArrangedSubview(dateLabel)
+        stack.addArrangedSubview(dotView)
         setupConstraints()
     }
     
     private func setupConstraints() {
         stack.anchor(
-            top: topAnchor,
-            bottom: bottomAnchor,
+            top: topAnchor, topConstant: 4,
+            bottom: bottomAnchor, bottomConstant: 4,
+            leading: leadingAnchor, leadingConstant: 2,
+            trailing: trailingAnchor, trailingConstant: 2,
             centerX: centerXAnchor
-        )
-        
-        titleLabel.anchor(
-            top: stack.topAnchor, //topConstant: 4,
-            centerX: stack.centerXAnchor
-        )
-        
-        dotView.anchor(
-            top: titleLabel.bottomAnchor, topConstant: 4,
-            bottom: stack.bottomAnchor, bottomConstant: 4,
-            centerX: stack.centerXAnchor
         )
         
         dotView.setSize(width: 6, height: 6)
@@ -88,16 +94,18 @@ class DayButtonView: UIControl {
     
     func configure(for date: Date, selected: Bool) {
         self.representedDate = date
-        titleLabel.text = dateFormatter.string(from: date)
+        titleLabel.text = monthAndWeekDateFormatter.string(from: date)
+        dateLabel.text = dayDateFormatter.string(from: date)
         isSelected = selected
         updateStyle()
     }
     
     private func updateStyle() {
         titleLabel.textColor = isSelected ? .white : .label
+        dateLabel.textColor = isSelected ? .white : .label
         backgroundColor =  isSelected ? .systemBlue : .clear
         dotView.backgroundColor = isSelected ? .white : .systemBlue
-        dotView.isHidden = !calendar.isDateInToday(representedDate ?? Date())
+        dotView.layer.opacity = !calendar.isDateInToday(representedDate ?? Date()) ? 0 : 1
     }
     
     override var isSelected: Bool {

@@ -13,7 +13,7 @@ class TextFieldView: UIView {
         let textField = PaddedTextField()
         textField.textPadding = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
         textField.placeholder = "Enter new habit"
-        textField.font = .systemFont(ofSize: 18, weight: .regular)
+        textField.font = .systemFont(ofSize: 16, weight: .regular)
         textField.borderStyle = .roundedRect
         return textField
     }()
@@ -23,8 +23,12 @@ class TextFieldView: UIView {
         button.setTitle("Add", for: .normal)
         button.backgroundColor = UIColor.systemBlue
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 8
-        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        button.layer.cornerRadius = 20
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        button.layer.shadowColor = UIColor.systemGray.cgColor
+        button.layer.shadowOpacity = 1
+        button.layer.shadowOffset = .init(width: 2, height: 2)
+        button.layer.shadowRadius = 0
         return button
     }()
     
@@ -50,8 +54,8 @@ class TextFieldView: UIView {
         )
 
         addButton.anchor(
-            top: topAnchor, topConstant: 12,
-            bottom: bottomAnchor, bottomConstant: 44,
+            top: topAnchor, topConstant: 8,
+            bottom: bottomAnchor, bottomConstant: 40,
             leading: habitTextField.trailingAnchor, leadingConstant: 16,
             trailing: trailingAnchor, trailingConstant: 12
         )

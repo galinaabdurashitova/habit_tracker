@@ -12,7 +12,7 @@ class HabitListViewController: UIViewController {
     internal let viewModel: HabitListViewModel
     internal let rootView = HabitListView()
     internal var habits: [Habit] = []
-
+    
     init(viewModel: HabitListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -32,10 +32,15 @@ class HabitListViewController: UIViewController {
             action: #selector(addHabit),
             for: .touchUpInside
         )
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         viewModel.loadHabits()
         
         rootView.weekSelectorView.onDateSelected = { [weak self] date in
             self?.viewModel.updateDate(to: date)
+            self?.rootView.dateLabel.text = DateFormatter.shortStyle.string(from: date)
         }
     }
     
@@ -55,4 +60,25 @@ class HabitListViewController: UIViewController {
         viewModel.addHabit(title: title)
         rootView.inputViewContainer.habitTextField.text = ""
     }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
+
+        rootView.inputViewBottomConstraint?.constant = -keyboardFrame.height + view.safeAreaInsets.bottom
+
+        UIView.animate(withDuration: duration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        rootView.inputViewBottomConstraint?.constant = 0
+
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+    }
+
 }
