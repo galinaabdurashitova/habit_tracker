@@ -9,6 +9,12 @@
 - ✅ Tap to mark/unmark completion for today
 - 💾 Data persistence using Core Data
 
+## Preview of UI
+
+<p align="center">
+  <img src="Screenshots/1_main_interface.png" width="200"/>
+</p>
+
 ## Architecture
 
 - UIKit + MVVM
