@@ -30,14 +30,9 @@ final class HabitListViewModel {
     }
 
     func deleteHabit(at index: Int) {
+        guard habits.count > index else { return }
         let habit = habits[index]
         storage.deleteHabit(habit)
-        loadHabits()
-    }
-    
-    func toggleHabitCompletion(at index: Int, for date: Date) {
-        let habit = habits[index]
-        storage.markHabit(habit, doneAt: date)
         loadHabits()
     }
     
@@ -47,6 +42,7 @@ final class HabitListViewModel {
     }
 
     func toggleHabitCompletion(at index: Int, for date: Date? = nil) {
+        guard habits.count > index else { return }
         let habit = habits[index]
         let dateToUse = date ?? selectedDate
         var updatedHabit = habit

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Habit {
+struct Habit: Equatable {
     let id: UUID
     let title: String
     var completedDates: Set<Date>
