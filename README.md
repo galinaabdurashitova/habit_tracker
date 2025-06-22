@@ -21,6 +21,7 @@
 - Core Data for storage
 - Clean separation of concerns (Models / Views / ViewModels / Persistence)
 - No storyboards, fully programmatic layout
+- Unit testing with XCTest
 
 ## Getting Started
 
