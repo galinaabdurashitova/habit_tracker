@@ -22,6 +22,7 @@
 - Clean separation of concerns (Models / Views / ViewModels / Persistence)
 - No storyboards, fully programmatic layout
 - Unit testing with XCTest
+- CI/CD with GitHub Actions for checking the build and running tests on pushes to the main
 
 ## Getting Started
 
