@@ -1,5 +1,7 @@
 # HabitTracker
 
+[![CI](https://github.com/galinaabdurashitova/habit_tracker/actions/workflows/ios-ci.yml/badge.svg?branch=main)](https://github.com/galinaabdurashitova/habit_tracker/actions/workflows/ios-ci.yml)
+
 **HabitTracker** is a lightweight UIKit-based iOS app that helps users build and track daily habits.
 
 ## Features
